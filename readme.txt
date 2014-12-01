@@ -6,6 +6,8 @@ Tested up to: 4.0.1
 Stable tag: 0.1.0
 License: GPLv2 or later
 
+A wordpress widget to add GoAbroadHQ fields to your website or blog. This plugin only works if you are an active client of GoAbroadHQ
+
 == Description ==
 
 GoAbroadHQ plugin allows you to add lead capture forms for GoAbroadHQ to your wordpress site.
