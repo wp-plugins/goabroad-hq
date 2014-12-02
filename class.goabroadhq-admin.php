@@ -19,7 +19,16 @@ class GoAbroadHQ_Admin {
 	public static function init_hooks() {
 		add_action( 'admin_menu', array( 'GoAbroadHQ_Admin', 'admin_menu' ), 5 ); # Priority 5, so it's called before Jetpack's admin_menu.
 		add_action( 'admin_notices', array( 'GoAbroadHQ_Admin', 'display_notice' ) );
+		add_filter( 'plugin_action_links_'.plugin_basename( plugin_dir_path( __FILE__ ) . 'goabroadhq.php'), array( 'GoAbroadHQ_Admin', 'admin_plugin_settings_link' ) );
 	}
+
+
+	public static function admin_plugin_settings_link( $links ) { 
+  		$settings_link = '<a href="'.esc_url( self::get_page_url() ).'">'.__('Settings', 'goabroadhq').'</a>';
+  		array_unshift( $links, $settings_link ); 
+  		return $links; 
+	}
+
 	public static function admin_init() {
 		if(!get_option('GoAbroadHQ_Username')){
 
