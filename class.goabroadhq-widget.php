@@ -32,7 +32,18 @@ class GoAbroadHQ_Lead_Widget extends WP_Widget {
 			}
 	function update( $new_instance, $old_instance ) {
 		$instance['title'] = strip_tags( $new_instance['title'] );
-		$instance['rows'] = (is_array($new_instance['rows'])) ? $new_instance['rows'] : array('FirstName');
+		$instance['rows'] = (is_array($new_instance['rows'])) ? $new_instance['rows'] : array('Email');
+
+		$required = array();
+		foreach($new_instance['required'] as $key=>$val){
+			if($val == 'on'){
+				$required[$key]=true;
+			} else {
+				$required[$key]=false;
+			}
+		}
+
+		$instance['required'] = $required;
 		return $instance;
 	}
 
@@ -53,7 +64,7 @@ class GoAbroadHQ_Lead_Widget extends WP_Widget {
 			<input type="hidden" value="goabroadhq_submit" name="goabroadhq_submit" />
 			<?php foreach($instance['rows'] as $val): ?>
 				<label><?= $HQ->getOption($val,'title'); ?></label>
-        <?= $HQ->render($val,array('class'=>'widefat','name'=>$val)) ?>
+        <?= $HQ->render($val,array('class'=>'widefat','name'=>$val),$instance['required'][$val]) ?>
 			<?php endforeach; ?>
 			<?php if(!in_array('TimeZoneId', $instance['rows'])): ?>
 				<input type="hidden" name="TimeZoneId" value="(UTC-07:00) Mountain Time (US & Canada)" />
