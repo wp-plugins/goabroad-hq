@@ -12,7 +12,7 @@ class GoAbroadHQ {
 	}
 
 	public static function submit(){
-		if(get_option('goabroadhq_recaptcha_sitekey')){
+		if(get_option('goabroadhq_recaptcha_sitekey') && get_option('goabroadhq_recaptcha_secret')){
 			$reCaptcha = new ReCaptcha(get_option('goabroadhq_recaptcha_secret'));
 			if ($_POST["g-recaptcha-response"]) {
 		    $resp = $reCaptcha->verifyResponse(
@@ -68,6 +68,11 @@ class GoAbroadHQ {
 	 * @static
 	 */
 	public static function plugin_deactivation( ) {
+		delete_option('goabroadhq_env');
+		delete_option('goabroadhq_username');
+		delete_option('goabroadhq_password');
+		delete_option('goabroadhq_recaptcha_secret');
+		delete_option('goabroadhq_recaptcha_sitekey');
 		//tidy up
 	}
 
