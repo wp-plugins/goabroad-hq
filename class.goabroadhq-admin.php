@@ -60,11 +60,11 @@ class GoAbroadHQ_Admin {
 
 	public static function enter_api_key(){
 		if ( isset( $_POST['_wpnonce'] ) && wp_verify_nonce( $_POST['_wpnonce'], self::NONCE ) ) {
-			if (isset($_POST['sitekey']) && isset($_POST['password'])) {
+			if (isset($_POST['username']) && isset($_POST['password'])) {
 				update_option( 'goabroadhq_env', 'prod' );
 				update_option( 'goabroadhq_username', $_POST['username'] );
 				update_option( 'goabroadhq_password', $_POST['password'] );
-				self::display_configuration_page();
+				GoAbroadHQ::view('activation_successful');
 				return;				
 			}
 		}
