@@ -3,7 +3,7 @@ Contributors: smakinson
 Tags: goabroadhq
 Requires at least: 3.1
 Tested up to: 4.0.1
-Stable tag: 0.3.1
+Stable tag: 0.3.2
 License: GPLv2 or later
 
 A wordpress widget to add GoAbroadHQ fields to your website or blog. This plugin only works if you are an active client of GoAbroadHQ
@@ -20,6 +20,8 @@ Upload the GoAbroadHQ plugin to your blog, Activate it, then enter your GoAbroad
 
 == Changelog ==
 
+= 0.3.2 =
+* Fixed a problem where the inital config page was limited to the number of characters entered.
 = 0.3.1 =
 * It now removes configuration from the database when the plugin is deactivated.
 = 0.3.0 =
