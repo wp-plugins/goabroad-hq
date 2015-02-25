@@ -35,7 +35,7 @@ if ( !function_exists( 'add_action' ) ) {
   exit;
 }
 
-define( 'GOABROADHQ_VERSION', '0.3.2' );
+define( 'GOABROADHQ_VERSION', '0.4.0' );
 define( 'GOABROADHQ_MINIMUM_WP_VERSION', '3.1' );
 define( 'GOABROADHQ_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'GOABROADHQ_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
