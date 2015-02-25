@@ -1,6 +1,7 @@
 <?php
 
 require(__DIR__.'/sdk/LeadCapture.php');
+require(__DIR__.'/sdk/ReCaptcha.php');
 
 class GoAbroadHQ {
 
@@ -11,8 +12,22 @@ class GoAbroadHQ {
 	}
 
 	public static function submit(){
-		$HQ = GoAbroadHQ::LeadCapture();
-		$HQ->submitLead($_POST);
+		if(get_option('goabroadhq_recaptcha_sitekey') && get_option('goabroadhq_recaptcha_secret')){
+			$reCaptcha = new ReCaptcha(get_option('goabroadhq_recaptcha_secret'));
+			if ($_POST["g-recaptcha-response"]) {
+		    $resp = $reCaptcha->verifyResponse(
+		        $_SERVER["REMOTE_ADDR"],
+		        $_POST["g-recaptcha-response"]
+		    );
+				if ($resp != null && $resp->success) {
+					$HQ = GoAbroadHQ::LeadCapture();
+					$HQ->submitLead($_POST);
+				}
+			}
+		} else {
+			$HQ = GoAbroadHQ::LeadCapture();
+			$HQ->submitLead($_POST);
+		}
 	}
 
 	public static function LeadCapture(){
@@ -53,6 +68,11 @@ class GoAbroadHQ {
 	 * @static
 	 */
 	public static function plugin_deactivation( ) {
+		delete_option('goabroadhq_env');
+		delete_option('goabroadhq_username');
+		delete_option('goabroadhq_password');
+		delete_option('goabroadhq_recaptcha_secret');
+		delete_option('goabroadhq_recaptcha_sitekey');
 		//tidy up
 	}
 
