@@ -8,7 +8,7 @@ class LeadCapture extends HqSdk{
 
   public function __construct($config){
     parent::__construct($config);
-    $this->config = require(__DIR__.'/Defaults.php');
+    $this->config = require(__DIR__.'/defaults.php');
   }
 
   public function getReferences(){
