@@ -27,12 +27,13 @@ class GoAbroadHQ_Lead_Widget extends WP_Widget {
 			margin-bottom: 10px;
 		}
 		</style>
-
 		<?php
 			}
 	function update( $new_instance, $old_instance ) {
 		$instance['title'] = strip_tags( $new_instance['title'] );
+		$instance['redirect_url'] = strip_tags( $new_instance['redirect_url'] );
 		$instance['rows'] = (is_array($new_instance['rows'])) ? $new_instance['rows'] : array('Email');
+		$instance['labels'] = (is_array($new_instance['labels'])) ? $new_instance['labels'] : array('Email'=>'Email');
 
 		$required = array();
 		foreach($new_instance['required'] as $key=>$val){
@@ -62,12 +63,19 @@ class GoAbroadHQ_Lead_Widget extends WP_Widget {
 		?>
 		<form action="<?= esc_url( $_SERVER['REQUEST_URI'] ) ?>" class="goabroadhq-form" method="post">
 			<input type="hidden" value="goabroadhq_submit" name="goabroadhq_submit" />
+			<input type="hidden" value="<?=$instance['redirect_url'] ?>" name="goabroadhq_redirect_url" />
 			<?php foreach($instance['rows'] as $val): ?>
-				<label><?= $HQ->getOption($val,'title'); ?></label>
+				<label><?= $instance['labels'][$val] ?></label>
         <?= $HQ->render($val,array('class'=>'widefat','name'=>$val),$instance['required'][$val]) ?>
 			<?php endforeach; ?>
 			<?php if(!in_array('TimeZoneId', $instance['rows'])): ?>
-				<input type="hidden" name="TimeZoneId" value="(UTC-07:00) Mountain Time (US & Canada)" />
+				<input type="hidden" name="TimeZoneId" value="Mountain Standard Tim" />
+			<?php endif; ?>
+			<?php if(get_option('goabroadhq_recaptcha_sitekey')): ?>
+      	<div class="g-recaptcha" data-sitekey="<?=get_option('goabroadhq_recaptcha_sitekey') ?>"></div>
+	      <script type="text/javascript"
+	          src="https://www.google.com/recaptcha/api.js?hl=<?php echo $lang;?>">
+	      </script>
 			<?php endif; ?>
 			<input type="submit" value="submit">
 		</form>

@@ -13,6 +13,9 @@ class GoAbroadHQ_Admin {
 		if ( isset( $_POST['action'] ) && $_POST['action'] == 'save-config' ) {
 			self::save_config();
 		}
+		if ( isset( $_POST['action'] ) && $_POST['action'] == 'save-recaptcha' ) {
+			self::save_recaptcha();
+		}
 
 	}
 
@@ -61,7 +64,7 @@ class GoAbroadHQ_Admin {
 				update_option( 'goabroadhq_env', 'prod' );
 				update_option( 'goabroadhq_username', $_POST['username'] );
 				update_option( 'goabroadhq_password', $_POST['password'] );
-				self::display_configuration_page();
+				GoAbroadHQ::view('activation_successful');
 				return;				
 			}
 		}
@@ -77,7 +80,7 @@ class GoAbroadHQ_Admin {
 		}
 
 		if ( $api_key = GoAbroadHQ::get_api_key() ) {
-			self::display_configuration_page();
+			//self::display_configuration_page();
 			return;
 		}
 
@@ -92,6 +95,15 @@ class GoAbroadHQ_Admin {
 				update_option( 'goabroadhq_env', 'prod' );
 				update_option( 'goabroadhq_username', $_POST['username'] );
 				update_option( 'goabroadhq_password', $_POST['password'] );
+				return;				
+			}
+		}
+	}
+	public static function save_recaptcha(){
+		if ( isset( $_POST['_wpnonce'] ) && wp_verify_nonce( $_POST['_wpnonce'], self::NONCE ) ) {
+			if (isset($_POST['sitekey']) && isset($_POST['secret'])) {
+				update_option( 'goabroadhq_recaptcha_sitekey', $_POST['sitekey'] );
+				update_option( 'goabroadhq_recaptcha_secret', $_POST['secret'] );
 				return;				
 			}
 		}
