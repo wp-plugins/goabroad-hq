@@ -103,7 +103,7 @@ else {
         <?php if(!$defaults['fields'][$row]['required']): ?>
           <label><input type="checkbox" name="<?php echo $widget->get_field_name('required'); ?>[<?=$row?>]" <?php if($required[$row]==true) echo 'checked' ?>/> required?</label>
         <?php else: ?>
-          <label><input type="checkbox" name="<?php echo $widget->get_field_name('required'); ?>[<?=$row?>]" disabled checked/> required?</label>
+          <label><input type="checkbox" name="<?php echo $widget->get_field_name('required'); ?>[<?=$row?>]" checked/> required?</label>
         <?php endif; ?>
       </div>
       </div>
@@ -139,7 +139,7 @@ else {
       if(!defaults['fields'][e.target.value].required){
         $(this).next('.goabroadhq_options').html('<label><input name="'+required+'['+e.target.value+']" type="checkbox" /> required?</label>');
       } else {
-        $(this).next('.goabroadhq_options').html('<label><input name="'+required+'['+e.target.value+']" type="checkbox" disabled checked/> required?</label>');
+        $(this).next('.goabroadhq_options').html('<label><input name="'+required+'['+e.target.value+']" type="checkbox" checked/> required?</label>');
       }
     });
   }

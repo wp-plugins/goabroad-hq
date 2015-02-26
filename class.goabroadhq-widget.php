@@ -36,11 +36,13 @@ class GoAbroadHQ_Lead_Widget extends WP_Widget {
 		$instance['labels'] = (is_array($new_instance['labels'])) ? $new_instance['labels'] : array('Email'=>'Email');
 
 		$required = array();
-		foreach($new_instance['required'] as $key=>$val){
-			if($val == 'on'){
-				$required[$key]=true;
-			} else {
-				$required[$key]=false;
+		if(is_array($new_instance['required'])){
+			foreach($new_instance['required'] as $key=>$val){
+				if($val == 'on'){
+					$required[$key]=true;
+				} else {
+					$required[$key]=false;
+				}
 			}
 		}
 
