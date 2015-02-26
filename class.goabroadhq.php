@@ -23,12 +23,14 @@ class GoAbroadHQ {
 					$HQ = GoAbroadHQ::LeadCapture();
 					$HQ->submitLead($_POST);
 					wp_redirect($_POST['goabroadhq_redirect_url']);
+					exit;
 				}
 			}
 		} else {
 			$HQ = GoAbroadHQ::LeadCapture();
 			$HQ->submitLead($_POST);
 			wp_redirect($_POST['goabroadhq_redirect_url']);
+			exit;
 		}
 	}
 
