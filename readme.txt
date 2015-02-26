@@ -2,7 +2,7 @@
 Contributors: smakinson
 Tags: goabroadhq
 Requires at least: 3.1
-Tested up to: 4.0.1
+Tested up to: 4.1.1
 Stable tag: 0.4.2
 License: GPLv2 or later
 
