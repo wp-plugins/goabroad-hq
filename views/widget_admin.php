@@ -4,12 +4,14 @@ if ( $instance ) {
   $rows = $instance['rows'];
   $required = $instance['required'];
   $labels = $instance['labels'];
+  $redirect_url = $instance['redirect_url'];
 }
 else {
   $title = __( 'Lead Capture' , 'goabroadhq');
   $rows = __( array('Email') , 'goabroadhq');
   $required = __( array('Email'=>true) , 'goabroadhq');
   $labels = __( array('Email'=>'Email') , 'goabroadhq');
+  $redirect_url = __( '/' , 'goabroadhq');
 }
   $defaults = include(__DIR__.'/../sdk/defaults.php');
 ?>
@@ -79,6 +81,8 @@ else {
 <p>
 <label for="<?php echo $widget->get_field_id( 'title' ); ?>"><?php esc_html_e( 'Title:' , 'goabroadhq'); ?></label>
 <input class="widefat" id="<?php echo $widget->get_field_id( 'title' ); ?>" name="<?php echo $widget->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
+<label for="<?php echo $widget->get_field_id( 'redirect_url' ); ?>"><?php esc_html_e( 'Redirect Url:' , 'goabroadhq'); ?></label>
+<input class="widefat" id="<?php echo $widget->get_field_id( 'redirect_url' ); ?>" name="<?php echo $widget->get_field_name( 'redirect_url' ); ?>" type="text" value="<?php echo esc_attr( $redirect_url ); ?>" />
 <div id="lead_capture_rows">
   <label>Fields</label>
   <?php if(is_array($rows) && count($rows) > 0): ?>
