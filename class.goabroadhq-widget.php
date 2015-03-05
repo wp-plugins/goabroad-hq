@@ -71,7 +71,7 @@ class GoAbroadHQ_Lead_Widget extends WP_Widget {
         <?= $HQ->render($val,array('class'=>'widefat','name'=>$val),$instance['required'][$val]) ?>
 			<?php endforeach; ?>
 			<?php if(!in_array('TimeZoneId', $instance['rows'])): ?>
-				<input type="hidden" name="TimeZoneId" value="Mountain Standard Tim" />
+				<input type="hidden" name="TimeZoneId" value="Mountain Standard Time" />
 			<?php endif; ?>
 			<?php if(get_option('goabroadhq_recaptcha_sitekey')): ?>
       	<div class="g-recaptcha" data-sitekey="<?=get_option('goabroadhq_recaptcha_sitekey') ?>"></div>

@@ -3,7 +3,7 @@ Contributors: smakinson
 Tags: goabroadhq
 Requires at least: 3.1
 Tested up to: 4.1.1
-Stable tag: 0.4.3
+Stable tag: 0.4.4
 License: GPLv2 or later
 
 A wordpress widget to add GoAbroadHQ fields to your website or blog. This plugin only works if you are an active client of GoAbroadHQ
@@ -20,6 +20,8 @@ Upload the GoAbroadHQ plugin to your blog, Activate it, then enter your GoAbroad
 
 == Changelog ==
 
+= 0.4.4 =
+* Fixed typo in TimeZoneId where it was submitting "Mountain Standard Tim" as default instead of "Mountain Standard Time"
 = 0.4.3 =
 * Added a required class to required field labels.
 = 0.4.2 =
