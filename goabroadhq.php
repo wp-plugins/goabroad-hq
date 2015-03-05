@@ -6,7 +6,7 @@
 Plugin Name: GoAbroadHQ
 Plugin URI: http://www.goabroadhq.com/
 Description: A wordpress widget to add GoAbroadHQ fields to your website or blog. This plugin only works if you are an active client of GoAbroadHQ
-Version: 0.2.0
+Version: 0.4.4
 Author: GoAbroad
 Author URI: http://www.goabroad.com
 License: GPLv2 or later
@@ -35,7 +35,7 @@ if ( !function_exists( 'add_action' ) ) {
   exit;
 }
 
-define( 'GOABROADHQ_VERSION', '0.2.0' );
+define( 'GOABROADHQ_VERSION', '0.4.4' );
 define( 'GOABROADHQ_MINIMUM_WP_VERSION', '3.1' );
 define( 'GOABROADHQ_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'GOABROADHQ_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
