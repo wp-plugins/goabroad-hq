@@ -6,8 +6,8 @@ require(__DIR__.'/TypeConverter.php');
 
 abstract class HqSdk {
 
-  const PROD_URL = 'http://23.253.92.209:84/API/GoAbroadHQ.svc';
-  const TEST_URL = 'http://23.253.92.209:85/DEVAPI/GoAbroadHQ.svc';
+  const PROD_URL = 'http://hq.goabroadhq.com:84/API/GoAbroadHQ.svc';
+  const TEST_URL = 'http://hq.goabroadhq.com:85/DEVAPI/GoAbroadHQ.svc';
 
   /*
    * The Environment Url that is to be used for requests.
@@ -50,14 +50,14 @@ abstract class HqSdk {
   }
 
   protected function get($to){
-    $get = array(
-      'userName'=>$this->username,
-      'password'=>$this->password
-    );
+    // $get = array(
+    //   'userName'=>$this->username,
+    //   'password'=>$this->password
+    // );
 
     // Open the file using the HTTP headers set above
     // 
-    $file = utf8_encode ( (string) file_get_contents($this->environment.'/'.ucwords($to).'?'.urldecode(http_build_query($get))) );
+    $file = utf8_encode ( (string) file_get_contents($this->environment.'/'.ucwords($to).'?userName='.$this->username.'&password='.$this->password) );
 
     $file = $this->toObject(TypeConverter::xmlToArray($file, TypeConverter::XML_MERGE));
     return $this->$to = $file;
