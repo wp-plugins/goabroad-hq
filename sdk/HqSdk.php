@@ -106,7 +106,7 @@ abstract class HqSdk {
       "Pragma: no-cache",
     );
     //set POST variables
-    $url = $this->environment.'/'.ucwords($to).'?'.urldecode(http_build_query($get));
+    $url = $this->environment.'/'.ucwords($to).'?userName='.$this->username.'&password='.$this->password;
 
     $fields_string = '';
 
