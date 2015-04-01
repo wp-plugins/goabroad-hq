@@ -63,14 +63,14 @@ class GoAbroadHQ {
 			
 			$message = '<strong>'.sprintf('GoAbroadHQ requires Wordpress %s or higher.' , 'goabroadhq', GOABROADHQ_VERSION, GOABROADHQ__MINIMUM_WP_VERSION ).'</strong><br>'.sprintf('Please <a href="%1$s">upgrade WordPress</a> to a current version.', 'goabroadhq', 'https://codex.wordpress.org/Upgrading_WordPress', 'http://wordpress.org/extend/plugins/goabroadhq/download/');
 
-			Self::bail_on_activation( $message );
+			GoAbroadHQ::bail_on_activation( $message );
 		}
 		if(!is_resource(@fsockopen('hq.goabroadhq.com', 84,$errno,$errstr,5))){
 			load_plugin_textdomain( 'goabroadhq' );
 			
 			$message = '<strong>'.sprintf('GoAbroadHQ requires you allow outgoing connections on port 84.' , 'goabroadhq').'</strong><br>'.sprintf('Please contact your hosting provider or systems administrator to open port 84.', 'goabroadhq');
 
-			Self::bail_on_activation( $message );
+			GoAbroadHQ::bail_on_activation( $message );
 		}
 	}
 
