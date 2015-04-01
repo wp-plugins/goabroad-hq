@@ -56,8 +56,7 @@ abstract class HqSdk {
     // );
 
     // Open the file using the HTTP headers set above
-    // 
-    $file = utf8_encode ( (string) file_get_contents($this->environment.'/'.ucwords($to).'?userName='.$this->username.'&password='.$this->password) );
+    $file = utf8_encode ( (string) file_get_contents("$this->environment/".ucwords($to)."?userName=$this->username&password=$this->password") );
 
     $file = $this->toObject(TypeConverter::xmlToArray($file, TypeConverter::XML_MERGE));
     return $this->$to = $file;
