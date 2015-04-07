@@ -65,10 +65,10 @@ class GoAbroadHQ {
 
 			GoAbroadHQ::bail_on_activation( $message );
 		}
-		if(!is_resource(@fsockopen('hq.goabroadhq.com', 84,$errno,$errstr,5))){
+		if(!is_resource(@fsockopen('hq.goabroadhq.com', 443,$errno,$errstr,5))){
 			load_plugin_textdomain( 'goabroadhq' );
 			
-			$message = '<strong>'.sprintf('GoAbroadHQ requires you allow outgoing connections on port 84.' , 'goabroadhq').'</strong><br>'.sprintf('Please contact your hosting provider or systems administrator to open port 84.', 'goabroadhq');
+			$message = '<strong>'.sprintf('GoAbroadHQ requires you allow outgoing connections on port 443.' , 'goabroadhq').'</strong><br>'.sprintf('Please contact your hosting provider or systems administrator to open port 443.', 'goabroadhq');
 
 			GoAbroadHQ::bail_on_activation( $message );
 		}
