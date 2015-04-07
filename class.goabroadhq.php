@@ -58,12 +58,19 @@ class GoAbroadHQ {
 	 * @static
 	 */
 	public static function plugin_activation() {
-		if ( version_compare( $GLOBALS['wp_version'], AKISMET__MINIMUM_WP_VERSION, '<' ) ) {
+		if ( version_compare( $GLOBALS['wp_version'], GOABROADHQ__MINIMUM_WP_VERSION, '<' ) ) {
 			load_plugin_textdomain( 'goabroadhq' );
 			
-			$message = '<strong>'.sprintf(esc_html__( 'Akismet %s requires WordPress %s or higher.' , 'goabroadhq'), AKISMET_VERSION, AKISMET__MINIMUM_WP_VERSION ).'</strong> '.sprintf(__('Please <a href="%1$s">upgrade WordPress</a> to a current version, or <a href="%2$s">downgrade to version 2.4 of the Akismet plugin</a>.', 'goabroadhq'), 'https://codex.wordpress.org/Upgrading_WordPress', 'http://wordpress.org/extend/plugins/goabroadhq/download/');
+			$message = '<strong>'.sprintf('GoAbroadHQ requires Wordpress %s or higher.' , 'goabroadhq', GOABROADHQ_VERSION, GOABROADHQ__MINIMUM_WP_VERSION ).'</strong><br>'.sprintf('Please <a href="%1$s">upgrade WordPress</a> to a current version.', 'goabroadhq', 'https://codex.wordpress.org/Upgrading_WordPress', 'http://wordpress.org/extend/plugins/goabroadhq/download/');
 
-			Self::bail_on_activation( $message );
+			GoAbroadHQ::bail_on_activation( $message );
+		}
+		if(!is_resource(@fsockopen('hq.goabroadhq.com', 84,$errno,$errstr,5))){
+			load_plugin_textdomain( 'goabroadhq' );
+			
+			$message = '<strong>'.sprintf('GoAbroadHQ requires you allow outgoing connections on port 84.' , 'goabroadhq').'</strong><br>'.sprintf('Please contact your hosting provider or systems administrator to open port 84.', 'goabroadhq');
+
+			GoAbroadHQ::bail_on_activation( $message );
 		}
 	}
 
@@ -87,27 +94,27 @@ class GoAbroadHQ {
 	<head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<body>
-	<p><?php echo esc_html( $message ); ?></p>
+	<p><?php echo $message; ?></p>
 	</body>
 	</html>
 	<?php
-			if ( $deactivate ) {
-				$plugins = get_option( 'active_plugins' );
-				$goabroadhq = plugin_basename( GOABROADHQ_PLUGIN_DIR . 'goabroadhq.php' );
-				$update  = false;
-				foreach ( $plugins as $i => $plugin ) {
-					if ( $plugin === $goabroadhq ) {
-						$plugins[$i] = false;
-						$update = true;
-					}
-				}
-
-				if ( $update ) {
-					update_option( 'active_plugins', array_filter( $plugins ) );
+		if ( $deactivate ) {
+			$plugins = get_option( 'active_plugins' );
+			$goabroadhq = plugin_basename( GOABROADHQ_PLUGIN_DIR . 'goabroadhq.php' );
+			$update  = false;
+			foreach ( $plugins as $i => $plugin ) {
+				if ( $plugin === $goabroadhq ) {
+					$plugins[$i] = false;
+					$update = true;
 				}
 			}
-			exit;
+
+			if ( $update ) {
+				update_option( 'active_plugins', array_filter( $plugins ) );
+			}
 		}
+		exit;
+	}
 
 
 	public static function get_api_key() {
