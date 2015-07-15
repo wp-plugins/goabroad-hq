@@ -67,8 +67,8 @@ class GoAbroadHQ_Lead_Widget extends WP_Widget {
 			<input type="hidden" value="goabroadhq_submit" name="goabroadhq_submit" />
 			<input type="hidden" value="<?=$instance['redirect_url'] ?>" name="goabroadhq_redirect_url" />
 			<?php foreach($instance['rows'] as $val): ?>
-				<label <?= $instance['required'][$val] ? 'class="required"' : '' ?> ><?= $instance['labels'][$val] ?></label>
-        <?= $HQ->render($val,array('class'=>'widefat','name'=>$val),$instance['required'][$val]) ?>
+				<label <?= (array_key_exists($val, $instance['required']) && $instance['required'][$val]) ? 'class="required"' : '' ?> ><?= $instance['labels'][$val] ?></label>
+        <?= $HQ->render($val,array('class'=>'widefat','name'=>$val),array_key_exists($val, $instance['required']) ? $instance['required'][$val] : false) ?>
 			<?php endforeach; ?>
 			<?php if(!in_array('TimeZoneId', $instance['rows'])): ?>
 				<input type="hidden" name="TimeZoneId" value="Mountain Standard Time" />
